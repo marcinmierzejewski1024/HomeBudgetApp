@@ -115,4 +115,8 @@ public class Expense
         this.description = description;
         this.date = date;
     }
+
+    public Expense()
+    {
+    }
 }

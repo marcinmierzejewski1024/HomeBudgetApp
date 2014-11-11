@@ -7,6 +7,7 @@ import com.j256.ormlite.misc.TransactionManager;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
@@ -50,5 +51,14 @@ public class ExpenseData extends BaseData
         qb.where().eq("expenseId", id);
 
         return qb.queryForFirst();
+    }
+
+    public List<Expense> getExpensesByUserId(long id) throws SQLException
+    {
+        final QueryBuilder<Expense, Long> qb = getDao().queryBuilder();
+
+        qb.where().eq("userId", id);
+
+        return qb.query();
     }
 }

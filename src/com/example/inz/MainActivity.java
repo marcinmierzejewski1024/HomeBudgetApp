@@ -2,6 +2,7 @@ package com.example.inz;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -50,7 +51,13 @@ public class MainActivity extends Activity {
         MainData dao = new MainData(this);
         try
         {
+            marcin = dao.getUserData().storeUser(marcin);
+            dao.getCategoryData().storeCategory(test);
             dao.getExpenseData().storeExpense(zakup);
+
+            List<Expense> lista = dao.getExpenseData().getExpensesByUserId(marcin.getUserId());
+            Log.wtf("rozmiar listy",":"+lista.size());
+
         }catch (Exception e)
         {
             e.printStackTrace();

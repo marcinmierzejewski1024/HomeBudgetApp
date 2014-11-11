@@ -15,7 +15,7 @@ public class MainData
 	extends OrmLiteSqliteOpenHelper
 {
 	private final static String DATABASE_NAME = "main_data.sqlite";
-	private final static int DATABASE_VERSION = 0;
+	private final static int DATABASE_VERSION = 1;
 
 	private final UserData userData;
     private final ExpenseData expenseData;

@@ -10,9 +10,11 @@ public class Category
     @DatabaseField(generatedId = true)
     long categoryId;
     @DatabaseField()
-    Category parentCategory;
+    long parentCategoryId;
     @DatabaseField()
     String name;
+
+    Category parentCategory;
 
     public long getCategoryId()
     {
@@ -44,6 +46,16 @@ public class Category
         this.name = name;
     }
 
+    public long getParentCategoryId()
+    {
+        return parentCategoryId;
+    }
+
+    public void setParentCategoryId(long parentCategoryId)
+    {
+        this.parentCategoryId = parentCategoryId;
+    }
+
     public Category(String name, Category parentCategory)
     {
         this.name = name;
@@ -53,5 +65,10 @@ public class Category
     public Category(String name)
     {
         this.name = name;
+
+    }
+
+    public Category()
+    {
     }
 }

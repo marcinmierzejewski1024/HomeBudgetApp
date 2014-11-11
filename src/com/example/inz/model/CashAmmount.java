@@ -9,7 +9,7 @@ import com.j256.ormlite.field.DatabaseField;
 public class CashAmmount
 {
     @DatabaseField(generatedId = true)
-    String cashAmmountId;
+    long cashAmmountId;
     @DatabaseField()
     int pennies;
     @DatabaseField(dataType= DataType.SERIALIZABLE)
@@ -19,6 +19,10 @@ public class CashAmmount
     {
         this.pennies = pennies;
         this.currency = currency;
+    }
+
+    public CashAmmount()
+    {
     }
 
     @Override
@@ -43,12 +47,12 @@ public class CashAmmount
         }
     }
 
-    public String getCashAmmountId()
+    public long getCashAmmountId()
     {
         return cashAmmountId;
     }
 
-    public void setCashAmmountId(String cashAmmountId)
+    public void setCashAmmountId(long cashAmmountId)
     {
         this.cashAmmountId = cashAmmountId;
     }
