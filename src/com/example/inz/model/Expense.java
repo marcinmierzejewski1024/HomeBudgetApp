@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by dom on 29/10/14.
  */
-public class Expense
+public class Expense extends AbsDatabaseItem
 {
     @DatabaseField(generatedId = true)
     long expenseId;
@@ -44,6 +44,7 @@ public class Expense
 
     public void setName(String name)
     {
+        setChanged();
         this.name = name;
     }
 
@@ -54,6 +55,7 @@ public class Expense
 
     public void setDescription(String description)
     {
+        setChanged();
         this.description = description;
     }
 
@@ -64,6 +66,7 @@ public class Expense
 
     public void setCashAmmountId(long cashAmmountId)
     {
+        setChanged();
         this.cashAmmountId = cashAmmountId;
     }
 
@@ -84,6 +87,7 @@ public class Expense
 
     public void setCash(CashAmmount cash)
     {
+        setChanged();
         this.cash = cash;
     }
 
@@ -94,6 +98,7 @@ public class Expense
 
     public void setCategory(Category category)
     {
+        setChanged();
         this.category = category;
     }
 
@@ -104,16 +109,19 @@ public class Expense
 
     public void setDate(Date date)
     {
+        setChanged();
         this.date = date;
     }
 
-    public Expense(Category category, CashAmmount cash, String name, String description, Date date)
+
+
+    public Expense(String name, String description, Date date, CashAmmount cash, Category category)
     {
-        this.category = category;
-        this.cash = cash;
         this.name = name;
         this.description = description;
         this.date = date;
+        this.cash = cash;
+        this.category = category;
     }
 
     public Expense()

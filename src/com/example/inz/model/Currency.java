@@ -22,4 +22,12 @@ public enum Currency implements Serializable
     }
 
 
+
+    public static Currency getDefault()
+    {
+        //STUB TODO:
+        return PLN;
+    }
+
+
 }

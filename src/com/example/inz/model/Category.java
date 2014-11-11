@@ -5,7 +5,7 @@ import com.j256.ormlite.field.DatabaseField;
 /**
  * Created by dom on 12.10.14.
  */
-public class Category
+public class Category extends AbsDatabaseItem
 {
     @DatabaseField(generatedId = true)
     long categoryId;
@@ -13,6 +13,8 @@ public class Category
     long parentCategoryId;
     @DatabaseField()
     String name;
+    @DatabaseField()
+    String hexColor;
 
     Category parentCategory;
 
@@ -43,6 +45,7 @@ public class Category
 
     public void setName(String name)
     {
+        setChanged();
         this.name = name;
     }
 
@@ -54,6 +57,16 @@ public class Category
     public void setParentCategoryId(long parentCategoryId)
     {
         this.parentCategoryId = parentCategoryId;
+    }
+
+    public String getHexColor()
+    {
+        return hexColor;
+    }
+
+    public void setHexColor(String hexColor)
+    {
+        this.hexColor = hexColor;
     }
 
     public Category(String name, Category parentCategory)

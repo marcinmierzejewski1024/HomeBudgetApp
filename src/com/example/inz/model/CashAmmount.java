@@ -6,7 +6,7 @@ import com.j256.ormlite.field.DatabaseField;
 /**
  * Created by dom on 29/10/14.
  */
-public class CashAmmount
+public class CashAmmount extends AbsDatabaseItem
 {
     @DatabaseField(generatedId = true)
     long cashAmmountId;
@@ -54,6 +54,7 @@ public class CashAmmount
 
     public void setCashAmmountId(long cashAmmountId)
     {
+        setChanged();
         this.cashAmmountId = cashAmmountId;
     }
 
@@ -64,7 +65,14 @@ public class CashAmmount
 
     public void setPennies(int pennies)
     {
+        setChanged();
         this.pennies = pennies;
+    }
+
+    public void addPennies(int p)
+    {
+        setChanged();
+        this.pennies += p;
     }
 
     public Currency getCurrency()
@@ -74,6 +82,7 @@ public class CashAmmount
 
     public void setCurrency(Currency currency)
     {
+        setChanged();
         this.currency = currency;
     }
 

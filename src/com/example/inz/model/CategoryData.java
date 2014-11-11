@@ -37,6 +37,7 @@ public class CategoryData extends BaseData
             {
                 getDao().createOrUpdate(category);
 
+                category.setStoredInDb(true);
                 return category;
             }
         });
@@ -48,6 +49,8 @@ public class CategoryData extends BaseData
 
         qb.where().eq("categoryId", id);
 
-        return qb.queryForFirst();
+        Category result = qb.queryForFirst();
+        result.setStoredInDb(true);
+        return result;
     }
 }

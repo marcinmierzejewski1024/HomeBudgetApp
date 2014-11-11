@@ -36,7 +36,7 @@ public class CashAmmountData extends BaseData
             public CashAmmount call() throws Exception
             {
                 getDao().createOrUpdate(cashAmmount);
-
+                cashAmmount.setStoredInDb(true);
                 return cashAmmount;
             }
         });
@@ -48,6 +48,8 @@ public class CashAmmountData extends BaseData
 
         qb.where().eq("cashAmmountId", id);
 
-        return qb.queryForFirst();
+        CashAmmount result = qb.queryForFirst();
+        result.setStoredInDb(true);
+        return result;
     }
 }

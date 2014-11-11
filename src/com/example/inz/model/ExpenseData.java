@@ -39,6 +39,7 @@ public class ExpenseData extends BaseData
                 getDao().createOrUpdate(expense);
                 getMainData().get().getCashAmmountData().storeCashAmmount(expense.getCash());
 
+                expense.setStoredInDb(true);
                 return expense;
             }
         });
@@ -50,15 +51,20 @@ public class ExpenseData extends BaseData
 
         qb.where().eq("expenseId", id);
 
-        return qb.queryForFirst();
+        Expense result = qb.queryForFirst();
+        result.setStoredInDb(true);
+        return result;
     }
 
-    public List<Expense> getExpensesByUserId(long id) throws SQLException
+    public List<Expense> getExpenses() throws SQLException
     {
         final QueryBuilder<Expense, Long> qb = getDao().queryBuilder();
 
-        qb.where().eq("userId", id);
+        List<Expense> results =  qb.query();
 
-        return qb.query();
+        for(Expense result : results)
+            result.setStoredInDb(true);
+
+        return results;
     }
 }

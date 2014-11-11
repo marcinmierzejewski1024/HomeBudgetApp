@@ -7,4 +7,11 @@
         <item>GBP</item>
         <item>EUR</item>
     </string-array>
+    <string-array name="range">
+
+        <item>Rok</item>
+        <item>3 miesiące</item>
+        <item>Miesiąc</item>
+        <item>Tydzień</item>
+    </string-array>
 </resources>

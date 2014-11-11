@@ -43,20 +43,18 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        User marcin = new User("Marcin");
         Category test = new Category("test");
         CashAmmount cashAmmount = new CashAmmount(1000,Currency.PLN);
-        Expense zakup = new Expense(test,cashAmmount,"kebab","smaczny",new Date());
+        Expense zakup = new Expense("kebab","smaczny",new Date(),cashAmmount,test);
 
         MainData dao = new MainData(this);
         try
         {
-            marcin = dao.getUserData().storeUser(marcin);
             dao.getCategoryData().storeCategory(test);
             dao.getExpenseData().storeExpense(zakup);
 
-            List<Expense> lista = dao.getExpenseData().getExpensesByUserId(marcin.getUserId());
-            Log.wtf("rozmiar listy",":"+lista.size());
+            List<Expense> lista = dao.getExpenseData().getExpenses();
+            Log.wtf("rozmiar listy", ":" + lista.size());
 
         }catch (Exception e)
         {
@@ -192,9 +190,9 @@ public class MainActivity extends Activity {
             case 1:
                 fragment = new AddFragment();
                 break;
-//            case 2:
-//                fragment = new PhotosFragment();
-//                break;
+            case 2:
+                fragment = new ExpenseFragment();
+                break;
 //            case 3:
 //                fragment = new CommunityFragment();
 //                break;
