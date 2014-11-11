@@ -1,0 +1,19 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/avalible_resources">
+
+        <ListPreference
+            android:key="@string/currency_key"
+            android:title="@string/currency_title"
+            android:entries="@array/currencies"
+            android:entryValues="@array/currencies"
+            />
+
+    </PreferenceCategory>
+
+
+
+
+</PreferenceScreen>
