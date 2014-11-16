@@ -15,8 +15,10 @@ import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 import com.example.inz.model.CashAmmount;
 import com.example.inz.model.Category;
+import com.example.inz.model.MainData;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,7 +26,7 @@ import java.util.List;
  */
 public class ExpenseFragment extends CommonFragment
 {
-    private static final int NAMED_CATEGORIES = 5;
+    private static final int NAMED_CATEGORIES = 8;
 
     View rootView;
     List<Pair<Category,CashAmmount>> data = new ArrayList<Pair<Category, CashAmmount>>();
@@ -34,10 +36,20 @@ public class ExpenseFragment extends CommonFragment
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
         {
-            //TODO:zmiana danych
+            Date now = new Date();
+            String daysString = getResources().getStringArray(R.array.rangeDays)[position];
+            long days = Integer.parseInt(daysString);
+            long fromMilis = now.getTime();
+            long timeDistance = (days * 24l * 60l * 60l * 1000l);
+            fromMilis -= timeDistance;
+            Date from = new Date(fromMilis);
 
-            drawChart();
-            drawChartLegend();
+            data = new MainData().getCategoryGroupedExpenses(from, NAMED_CATEGORIES);
+            if(data != null)
+            {
+                drawChart();
+                drawChartLegend();
+            }
         }
 
         @Override
@@ -57,8 +69,8 @@ public class ExpenseFragment extends CommonFragment
         Spinner range= (Spinner) rootView.findViewById(R.id.spinnerRange);
         range.setOnItemSelectedListener(rangeListener);
 
-        drawChart();
-        drawChartLegend();
+//        drawChart();
+//        //drawChartLegend();
 
         return rootView;
     }
@@ -67,6 +79,7 @@ public class ExpenseFragment extends CommonFragment
     {
         PieGraph pg = (PieGraph)rootView.findViewById(R.id.graph);
 
+        pg.removeSlices();
         for(Pair<Category,CashAmmount> singleItem:data)
         {
             PieSlice slice = new PieSlice();
@@ -84,8 +97,16 @@ public class ExpenseFragment extends CommonFragment
 
     private void drawChartLegend()
     {
-        ListView legend = (ListView) rootView.findViewById(R.id.legendListView);
-        LegendAdapter adapter = new LegendAdapter(getActivity(), data);
-        legend.setAdapter(adapter);
+        try
+        {
+            ListView legend = (ListView) rootView.findViewById(R.id.legendListView);
+            Pair<Category, CashAmmount>[] tmp=new Pair[1];
+            LegendAdapter adapter = new LegendAdapter(getActivity(), (Pair<Category, CashAmmount>[]) data.toArray(tmp));
+            legend.setAdapter(adapter);
+        }
+        catch (Exception e )
+        {
+            e.printStackTrace();
+        }
     }
 }

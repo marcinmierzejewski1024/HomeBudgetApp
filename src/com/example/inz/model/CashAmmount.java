@@ -86,6 +86,9 @@ public class CashAmmount extends AbsDatabaseItem
         this.currency = currency;
     }
 
-
+    public boolean isZero()
+    {
+        return pennies==0;
+    }
 
 }

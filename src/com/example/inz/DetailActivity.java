@@ -11,6 +11,13 @@ import android.util.Log;
  */
 public class DetailActivity extends Activity
 {
+    public static final String CATEGORY_FRAGMENT = "categoryFragment";
+    public static final String EXPENSE_DETAILS_FRAGMENT = "expenseDetailsFragment";
+    public static final String ADD_INCOME_FRAGMENT = "addincomeFragment";
+    public static final String ADD_EXPENSE_FRAGMENT = "addExpenseFragment";
+
+
+
 
     public static final String TAG = "DetailActivity";
     public static final String FRAGMENT_KEY = "fragmentKey";
@@ -19,15 +26,21 @@ public class DetailActivity extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setIcon(R.drawable.ic_launcher);
+        //getActionBar().setIcon(R.drawable.ic_launcher);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
         try
         {
             String fragmentToShow = getIntent().getStringExtra(FRAGMENT_KEY);
-            setFragment(new AddFragment());
-
+            if(fragmentToShow.equals(CATEGORY_FRAGMENT))
+            {
+                setFragment(new CategoryFragment());
+            }
+            else if(fragmentToShow.equals(ADD_EXPENSE_FRAGMENT))
+            {
+                setFragment(new AddFragment());
+            }
         } catch (Exception e)
         {
 

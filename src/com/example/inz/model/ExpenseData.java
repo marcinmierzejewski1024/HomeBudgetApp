@@ -36,9 +36,11 @@ public class ExpenseData extends BaseData
             @Override
             public Expense call() throws Exception
             {
-                getDao().createOrUpdate(expense);
-                getMainData().get().getCashAmmountData().storeCashAmmount(expense.getCash());
 
+                expense.setCashAmmountId(getMainData().get().getCashAmmountData().storeCashAmmount(expense.getCash()).getCashAmmountId());
+                expense.setCategoryId(getMainData().get().getCategoryData().storeCategory(expense.getCategory()).getCategoryId());
+
+                getDao().createOrUpdate(expense);
                 expense.setStoredInDb(true);
                 return expense;
             }
@@ -52,19 +54,41 @@ public class ExpenseData extends BaseData
         qb.where().eq("expenseId", id);
 
         Expense result = qb.queryForFirst();
+        result.setCategory(getMainData().get().getCategoryData().getCategoryById(result.getCategoryId()));
+        result.setCash(getMainData().get().getCashAmmountData().getCashAmmountById(result.getCashAmmountId()));
         result.setStoredInDb(true);
         return result;
     }
 
     public List<Expense> getExpenses() throws SQLException
     {
+
         final QueryBuilder<Expense, Long> qb = getDao().queryBuilder();
 
         List<Expense> results =  qb.query();
 
         for(Expense result : results)
+        {
+            result.setCategory(getMainData().get().getCategoryData().getCategoryById(result.getCategoryId()));
+            result.setCash(getMainData().get().getCashAmmountData().getCashAmmountById(result.getCashAmmountId()));
             result.setStoredInDb(true);
+        }
+        return results;
+    }
 
+    public List<Expense> getExpensesByCategoryId(Long categoryId) throws SQLException
+    {
+        final QueryBuilder<Expense, Long> qb = getDao().queryBuilder();
+        qb.where().eq("categoryId",categoryId);
+
+        List<Expense> results =  qb.query();
+
+        for(Expense result : results)
+        {
+            result.setCategory(getMainData().get().getCategoryData().getCategoryById(result.getCategoryId()));
+            result.setCash(getMainData().get().getCashAmmountData().getCashAmmountById(result.getCashAmmountId()));
+            result.setStoredInDb(true);
+        }
         return results;
     }
 }

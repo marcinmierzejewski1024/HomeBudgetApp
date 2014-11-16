@@ -20,11 +20,11 @@ public class LegendAdapter extends ArrayAdapter<Pair<Category,CashAmmount>> {
     private final Context context;
     private Pair<Category,CashAmmount>[] values;
 
-    public LegendAdapter(Context context, List<Pair<Category,CashAmmount>> values)
+    public LegendAdapter(Context context, Pair<Category,CashAmmount>[] values)
     {
         super(context, R.layout.legend_item, values);
         this.context = context;
-        this.values = values.toArray(this.values);
+        this.values = values;
     }
 
 
@@ -37,8 +37,11 @@ public class LegendAdapter extends ArrayAdapter<Pair<Category,CashAmmount>> {
 
         TextView categoryName = (TextView) rowView.findViewById(R.id.categoryName);
         View colorView = rowView.findViewById(R.id.color);
+        TextView categorySum = (TextView) rowView.findViewById(R.id.categorySum);
 
         categoryName.setText(values[position].first.getName());
+        categorySum.setText(values[position].second.toString());
+
         colorView.setBackground(new ColorDrawable(Color.parseColor(values[position].first.getHexColor())));
 
 

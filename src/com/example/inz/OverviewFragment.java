@@ -75,16 +75,21 @@ public class OverviewFragment extends CommonFragment
 
     private void onAddMenuItemClick(MenuItem item)
     {
+
+        Intent i = new Intent(getActivity(),DetailActivity.class);
+
         if(item.getItemId()==AddCategories.INCOME.ordinal())
         {
-            getActivity().startActivity(new Intent(getActivity(),DetailActivity.class));
+            i.putExtra(DetailActivity.FRAGMENT_KEY,DetailActivity.ADD_INCOME_FRAGMENT);
         }
         else if(item.getItemId() == AddCategories.EXPENSE.ordinal())
         {
-
-            Log.i(TAG,"expense!");
+            i.putExtra(DetailActivity.FRAGMENT_KEY,DetailActivity.CATEGORY_FRAGMENT);
+            i.putExtra(CategoryFragment.CATEGORY_ID_KEY,1l);
 
         }
 
+
+        getActivity().startActivity(i);
     }
 }

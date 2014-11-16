@@ -49,7 +49,10 @@ public class CashAmmountData extends BaseData
         qb.where().eq("cashAmmountId", id);
 
         CashAmmount result = qb.queryForFirst();
-        result.setStoredInDb(true);
+
+        if(result!=null)
+            result.setStoredInDb(true);
+
         return result;
     }
 }

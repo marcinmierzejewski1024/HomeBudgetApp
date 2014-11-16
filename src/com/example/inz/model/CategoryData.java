@@ -7,6 +7,7 @@ import com.j256.ormlite.misc.TransactionManager;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
@@ -50,7 +51,20 @@ public class CategoryData extends BaseData
         qb.where().eq("categoryId", id);
 
         Category result = qb.queryForFirst();
-        result.setStoredInDb(true);
+        if(result!=null)
+            result.setStoredInDb(true);
         return result;
+    }
+
+    public List<Category> getCategories() throws SQLException
+    {
+        final QueryBuilder<Category, Long> qb = getDao().queryBuilder();
+
+        List<Category> results =  qb.query();
+
+        for(Category result : results)
+            result.setStoredInDb(true);
+
+        return results;
     }
 }

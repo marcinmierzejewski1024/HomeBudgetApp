@@ -47,4 +47,6 @@
     <string name="name">Nazwa</string>
     <string name="category">Kategoria</string>
     <string name="ammount">Kwota</string>
+    <string name="add_success">Dodano wydatek</string>
+    <string name="cash_ammount_is_zero">Kwota nie może byc zerowa</string>
 </resources>

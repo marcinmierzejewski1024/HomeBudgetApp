@@ -20,7 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.example.inz.model.*;
 
-public class MainActivity extends Activity {
+public class MainActivity extends CommonActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -43,24 +43,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        Category test = new Category("test");
-        CashAmmount cashAmmount = new CashAmmount(1000,Currency.PLN);
-        Expense zakup = new Expense("kebab","smaczny",new Date(),cashAmmount,test);
-
-        MainData dao = new MainData(this);
-        try
-        {
-            dao.getCategoryData().storeCategory(test);
-            dao.getExpenseData().storeExpense(zakup);
-
-            List<Expense> lista = dao.getExpenseData().getExpenses();
-            Log.wtf("rozmiar listy", ":" + lista.size());
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-
-        }
         mTitle = mDrawerTitle = getTitle();
 
         // load slide menu items
