@@ -9,7 +9,7 @@ import android.util.Log;
 /**
  * Created by dom on 05/11/14.
  */
-public class DetailActivity extends Activity
+public class DetailActivity extends CommonActivity
 {
     public static final String CATEGORY_FRAGMENT = "categoryFragment";
     public static final String EXPENSE_DETAILS_FRAGMENT = "expenseDetailsFragment";
@@ -30,6 +30,7 @@ public class DetailActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+
         try
         {
             String fragmentToShow = getIntent().getStringExtra(FRAGMENT_KEY);
@@ -40,6 +41,18 @@ public class DetailActivity extends Activity
             else if(fragmentToShow.equals(ADD_EXPENSE_FRAGMENT))
             {
                 setFragment(new AddFragment());
+            }
+            else if(fragmentToShow.equals(ADD_INCOME_FRAGMENT))
+            {
+                setFragment(new AddFragment());
+            }
+            else if(fragmentToShow.equals(EXPENSE_DETAILS_FRAGMENT))
+            {
+                setFragment(new ExpenseDetailsFragment());
+            }
+            else
+            {
+                throw new Exception("nie znany typ fragmentu do otworzenia w szczegolwej aktywnosci");
             }
         } catch (Exception e)
         {

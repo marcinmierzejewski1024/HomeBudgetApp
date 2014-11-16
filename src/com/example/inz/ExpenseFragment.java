@@ -69,9 +69,6 @@ public class ExpenseFragment extends CommonFragment
         Spinner range= (Spinner) rootView.findViewById(R.id.spinnerRange);
         range.setOnItemSelectedListener(rangeListener);
 
-//        drawChart();
-//        //drawChartLegend();
-
         return rootView;
     }
 
@@ -103,6 +100,15 @@ public class ExpenseFragment extends CommonFragment
             Pair<Category, CashAmmount>[] tmp=new Pair[1];
             LegendAdapter adapter = new LegendAdapter(getActivity(), (Pair<Category, CashAmmount>[]) data.toArray(tmp));
             legend.setAdapter(adapter);
+            legend.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Long catId = (Long) view.getTag();
+                ((CommonActivity)getActivity()).openCategory(catId);
+            }
+        });
         }
         catch (Exception e )
         {

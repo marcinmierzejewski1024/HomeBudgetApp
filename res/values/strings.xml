@@ -49,4 +49,9 @@
     <string name="ammount">Kwota</string>
     <string name="add_success">Dodano wydatek</string>
     <string name="cash_ammount_is_zero">Kwota nie może byc zerowa</string>
+    <string name="delete">Usun</string>
+    <string name="edition_mode">tryb edycji</string>
+    <string name="save">Zapisz</string>
+    <string name="changes_saved">Zapisano zmiany</string>
+    <string name="changes_saved_failed">Nie udało sie zapisac zmian</string>
 </resources>

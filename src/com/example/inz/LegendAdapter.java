@@ -35,6 +35,8 @@ public class LegendAdapter extends ArrayAdapter<Pair<Category,CashAmmount>> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.legend_item, parent, false);
 
+        rowView.setTag(values[position].first.getCategoryId());
+
         TextView categoryName = (TextView) rowView.findViewById(R.id.categoryName);
         View colorView = rowView.findViewById(R.id.color);
         TextView categorySum = (TextView) rowView.findViewById(R.id.categorySum);

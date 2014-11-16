@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.inz.model.Category;
@@ -53,7 +54,18 @@ public class CategoryFragment extends CommonFragment
 
         categoryName.setText(data.getName());
         categoryName.setBackground(new ColorDrawable(Color.parseColor(data.getHexColor())));
-        //todo lista
+
+        Expense[] arr = {};
+        categoryExpenses.setAdapter(new ExpenseAdapter(getActivity(), expenses.toArray(arr)));
+        categoryExpenses.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Long expenseId = (Long) view.getTag();
+                ((CommonActivity)getActivity()).openExpense(expenseId);
+            }
+        });
     }
 
     public void loadData(Long categoryId)

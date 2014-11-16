@@ -42,6 +42,20 @@ public class CashAmmountData extends BaseData
         });
     }
 
+
+    public CashAmmount updateCashAmmount(final CashAmmount cashAmmount) throws SQLException
+    {
+        return TransactionManager.callInTransaction(mainData.get().getConnectionSource(), new Callable<CashAmmount>()
+        {
+            @Override
+            public CashAmmount call() throws Exception
+            {
+                getDao().update(cashAmmount);
+                cashAmmount.setStoredInDb(true);
+                return cashAmmount;
+            }
+        });
+    }
     public CashAmmount getCashAmmountById(long id) throws SQLException
     {
         final QueryBuilder<CashAmmount, Long> qb = getDao().queryBuilder();

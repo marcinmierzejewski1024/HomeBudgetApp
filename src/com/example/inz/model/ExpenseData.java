@@ -47,6 +47,23 @@ public class ExpenseData extends BaseData
         });
     }
 
+    public Expense updateExpense(final Expense expense) throws SQLException
+    {
+        return TransactionManager.callInTransaction(mainData.get().getConnectionSource(), new Callable<Expense>()
+        {
+            @Override
+            public Expense call() throws Exception
+            {
+
+                expense.setCashAmmountId(getMainData().get().getCashAmmountData().updateCashAmmount(expense.getCash()).getCashAmmountId());
+
+                getDao().update(expense);
+                expense.setStoredInDb(true);
+                return expense;
+            }
+        });
+    }
+
     public Expense getExpenseById(long id) throws SQLException
     {
         final QueryBuilder<Expense, Long> qb = getDao().queryBuilder();
