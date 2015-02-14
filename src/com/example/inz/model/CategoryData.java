@@ -56,11 +56,35 @@ public class CategoryData extends BaseData
         return result;
     }
 
-    public List<Category> getCategories() throws SQLException
+    public List<Category> getAllCategories() throws SQLException
     {
         final QueryBuilder<Category, Long> qb = getDao().queryBuilder();
 
         List<Category> results =  qb.query();
+
+        for(Category result : results)
+            result.setStoredInDb(true);
+
+        return results;
+    }
+
+    public List<Category> getExpenseCategories() throws SQLException
+    {
+        final QueryBuilder<Category, Long> qb = getDao().queryBuilder();
+
+        List<Category> results =  qb.where().eq("isIncomeCategory",false).query();
+
+        for(Category result : results)
+            result.setStoredInDb(true);
+
+        return results;
+    }
+
+    public List<Category> getIncomeCategories() throws SQLException
+    {
+        final QueryBuilder<Category, Long> qb = getDao().queryBuilder();
+
+        List<Category> results =  qb.where().eq("isIncomeCategory",true).query();
 
         for(Category result : results)
             result.setStoredInDb(true);

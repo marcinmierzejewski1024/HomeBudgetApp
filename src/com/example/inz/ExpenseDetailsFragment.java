@@ -1,35 +1,31 @@
 package com.example.inz;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.example.inz.common.CommonQuestionDialog;
+import com.example.inz.common.CommonQuestionDialogFragment;
 import com.example.inz.model.Expense;
 import com.example.inz.model.MainData;
 
+import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.Date;
 
 /**
  * Created by dom on 16/11/14.
  */
-public class ExpenseDetailsFragment extends CommonFragment
+public class ExpenseDetailsFragment extends AddFragment
 {
     public static final String EXPENSE_ID_KEY = "expenseIdkey";
 
-    View rootView;
     LinearLayout detailsContainer;
     Switch editingSwitch;
-
     boolean editingMode = false;
-
-
     Expense expense;
-    private EditText nameEditText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,19 +61,23 @@ public class ExpenseDetailsFragment extends CommonFragment
         {
             e.printStackTrace();
         }
-        updateViews();
+
     }
 
     public void updateViews()
     {
+        if(expense!=null)
+            loadExpense(expense.getExpenseId());
+
         if(editingMode)
         {
             LayoutInflater layoutInflater = (LayoutInflater)
                     getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             detailsContainer.removeAllViews();
             detailsContainer.addView(layoutInflater.inflate(R.layout.add_fragment,detailsContainer,false), 0);
-            nameEditText = (EditText) detailsContainer.findViewById(R.id.nameText);
-            nameEditText.setText(expense.getName());
+
+            prepareAddingLayout(detailsContainer);
+
 
             Button saveButton = (Button) detailsContainer.findViewById(R.id.addButton);
             saveButton.setText(R.string.save);
@@ -93,7 +93,8 @@ public class ExpenseDetailsFragment extends CommonFragment
                         Toast.makeText(getActivity(),R.string.changes_saved,Toast.LENGTH_SHORT).show();
                         loadExpense(expense.getExpenseId());
                         editingSwitch.setChecked(false);
-                    } catch (SQLException e)
+                    }
+                    catch (SQLException e)
                     {
                         Toast.makeText(getActivity(),R.string.changes_saved_failed,Toast.LENGTH_SHORT).show();
                     }
@@ -114,17 +115,30 @@ public class ExpenseDetailsFragment extends CommonFragment
             TextView category = (TextView) detailsContainer.findViewById(R.id.category);
             TextView cash = (TextView) detailsContainer.findViewById(R.id.cash);
 
+            Button deleteButton = (Button) detailsContainer.findViewById(R.id.deleteButton);
+            deleteButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    delete();
+                }
+            });
+
             name.setText(expense.getName());
-            cash.setText(expense.getCash().toString());
-            category.setText(getString(R.string.category) +":"+ expense.getCategory().getName());
+
+            if(expense.getCash()!=null)
+                cash.setText(expense.getCash().toString());
+
+            category.setText(getString(R.string.category) +":"+ expense.getCategory());
         }
     }
 
     private void save() throws SQLException
     {
-        //expense.setDate(new Date());
-        //expense.setCash(ammount);
-        //expense.setCategory(category);
+
+        expense.setCash(ammount);
+        expense.setCategory(category);
         expense.setName(nameEditText.getText().toString());
 
         MainData dao = new MainData();
@@ -132,5 +146,32 @@ public class ExpenseDetailsFragment extends CommonFragment
 
     }
 
+    private void delete()
+    {
+
+        CommonQuestionDialog.show(getActivity(),getString(R.string.delete_expense_question),new CommonQuestionDialogFragment.EventsListener(){
+
+            @Override
+            public void onQuestionDialogClick(CommonQuestionDialogFragment.Answer answer, Serializable data)
+            {
+                if(answer == CommonQuestionDialogFragment.Answer.YES)
+                {
+                    MainData dao = new MainData();
+                    boolean result = dao.getExpenseData().deleteExpense(expense.getExpenseId());
+                    if(result)
+                    {
+                        Toast.makeText(getActivity(),R.string.delete_expense_success,Toast.LENGTH_SHORT).show();
+                        getActivity().finish();
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity(),R.string.delete_expense_failed,Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.example.inz;
+package com.example.inz.common;
 
 import android.app.Fragment;
 

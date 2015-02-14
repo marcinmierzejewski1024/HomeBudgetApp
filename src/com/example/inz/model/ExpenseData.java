@@ -4,6 +4,7 @@ import android.location.Location;
 import android.util.Log;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.misc.TransactionManager;
+import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
@@ -107,5 +108,21 @@ public class ExpenseData extends BaseData
             result.setStoredInDb(true);
         }
         return results;
+    }
+
+    public boolean deleteExpense(long expenseId)
+    {
+        try
+        {
+            final DeleteBuilder<Expense, Long> qb = getDao().deleteBuilder();
+            qb.where().eq("expenseId", expenseId);
+            qb.delete();
+            return true;
+        }
+        catch (Exception e)
+        {
+            Log.e("ExpenseData",e.toString());
+            return false;
+        }
     }
 }

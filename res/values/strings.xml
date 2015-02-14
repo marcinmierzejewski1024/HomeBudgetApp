@@ -54,4 +54,11 @@
     <string name="save">Zapisz</string>
     <string name="changes_saved">Zapisano zmiany</string>
     <string name="changes_saved_failed">Nie udało sie zapisac zmian</string>
+    <string name="diffrent_ammount">Inna kwota</string>
+    <string name="delete_expense_question">Czy napewno chcesz usunąc wydatek?</string>
+    <string name="delete_expense_success">Usunięto wydatek</string>
+    <string name="delete_expense_failed">Nie udało się usunąc wydatku</string>
+    <string name="no">Nie</string>
+    <string name="yes">Tak</string>
+    <string name="no_rates_found">Brak danych kursu walut</string>
 </resources>

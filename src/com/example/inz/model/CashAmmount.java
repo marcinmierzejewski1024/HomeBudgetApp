@@ -1,7 +1,10 @@
 package com.example.inz.model;
 
+import com.example.inz.MainApp;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+
+import java.sql.SQLException;
 
 /**
  * Created by dom on 29/10/14.
@@ -11,7 +14,7 @@ public class CashAmmount extends AbsDatabaseItem
     @DatabaseField(generatedId = true)
     long cashAmmountId;
     @DatabaseField()
-    int pennies;
+    Integer pennies;
     @DatabaseField(dataType= DataType.SERIALIZABLE)
     Currency currency;
 
@@ -28,14 +31,17 @@ public class CashAmmount extends AbsDatabaseItem
     @Override
     public String toString()
     {
-        String ammountInCurrency = formatDecimal(pennies/100f);
+//        if(Currency.getDefault() == currency)
+//        {
+            String ammountInCurrency = formatDecimal(pennies / 100f);
 
-        if(currency.afterAmount)
-            return ammountInCurrency+" "+currency.abrevation;
-        else
-            return currency.abrevation + " " + ammountInCurrency;
-
+            if (currency.afterAmount)
+                return ammountInCurrency + " " + currency.abrevation;
+            else
+                return currency.abrevation + " " + ammountInCurrency;
+//        }
     }
+
 
     private String formatDecimal(float number)
     {
@@ -58,21 +64,41 @@ public class CashAmmount extends AbsDatabaseItem
         this.cashAmmountId = cashAmmountId;
     }
 
-    public int getPennies()
+    public Integer getPennies()
     {
-        return pennies;
+        return getPennies(Currency.getDefault());
     }
 
-    public void setPennies(int pennies)
+    public Integer getPennies(Currency currencyTo)
+    {
+        CurrencyExchangeRateData dao = new MainData().getExchangeRateData();
+
+        try
+        {
+            return (int)(pennies * dao.getLastRating(currency,currencyTo));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
+    public void setPennies(Integer pennies)
     {
         setChanged();
         this.pennies = pennies;
     }
 
-    public void addPennies(int p)
+    public void addCash(CashAmmount cashAmmount)
     {
         setChanged();
-        this.pennies += p;
+        if(cashAmmount!= null)
+        {
+            this.pennies += cashAmmount.getPennies(currency);
+        }
     }
 
     public Currency getCurrency()

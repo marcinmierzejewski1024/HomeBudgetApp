@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.example.inz.common.CommonActivity;
+import com.example.inz.common.CommonFragment;
 import com.example.inz.model.Category;
 import com.example.inz.model.Expense;
 import com.example.inz.model.MainData;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 /**
  * Created by dom on 11/11/14.

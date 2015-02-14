@@ -1,15 +1,15 @@
 package com.example.inz;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
+import com.example.inz.common.CommonActivity;
 
 /**
  * Created by dom on 05/11/14.
  */
-public class DetailActivity extends CommonActivity
+public class DetailActivity extends CommonActivity implements DiffrentAmmountDialog.EventListener
 {
     public static final String CATEGORY_FRAGMENT = "categoryFragment";
     public static final String EXPENSE_DETAILS_FRAGMENT = "expenseDetailsFragment";
@@ -21,6 +21,7 @@ public class DetailActivity extends CommonActivity
 
     public static final String TAG = "DetailActivity";
     public static final String FRAGMENT_KEY = "fragmentKey";
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,11 +65,20 @@ public class DetailActivity extends CommonActivity
 
     public void setFragment(Fragment fragment)
     {
+        currentFragment = fragment;
         if (fragment != null)
         {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, fragment).commit();
         }
+    }
+
+
+    @Override
+    public void onChangeAmmount(double newVal)
+    {
+        if(currentFragment instanceof DiffrentAmmountDialog.EventListener)
+            ((DiffrentAmmountDialog.EventListener) currentFragment).onChangeAmmount(newVal);
     }
 }

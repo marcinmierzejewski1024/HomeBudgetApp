@@ -1,43 +1,82 @@
 package com.example.inz;
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
+import com.example.inz.common.CommonFragment;
 import com.example.inz.model.*;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by dom on 05/11/14.
  */
-public class AddFragment extends CommonFragment
+public class AddFragment extends CommonFragment implements DiffrentAmmountDialog.EventListener
 {
+    public static final String TYPE_OF_ADD_KEY = "typeOfAdd";
+    public static final String INCOME = "income";
+    public static final String EXPENSE = "expense";
+
+    boolean isIncome;
+
     View rootView;
     Spinner categorySpinner;
     Spinner currencySpinner;
     SeekBar cashAmmountSeekBar;
     TextView cashAmmountTextView;
+    TextView diffrentAmount;
     EditText nameEditText;
     Button addButton;
 
 
     CashAmmount ammount = new CashAmmount(0,Currency.values()[0]);
     Category category = null;
+    private List<Category> categories;
 
-
+    private View.OnClickListener onDiffrentAmmountClickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            DialogFragment dialog = new DiffrentAmmountDialog();
+            dialog.show(getFragmentManager(),"DialogFragment");
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        if(savedInstanceState!=null)
+        {
+            String type = savedInstanceState.getString(TYPE_OF_ADD_KEY);
+            if (type.equals(INCOME))
+            {
+                isIncome = true;
+            } else
+            {
+                isIncome = false;
+            }
+        }
+
 
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
         getActivity().getActionBar().setIcon(R.drawable.ic_home);
         getActivity().invalidateOptionsMenu();
         setHasOptionsMenu(true);
+
         rootView = inflater.inflate(R.layout.add_fragment,container,false);
+
+        prepareAddingLayout(rootView);
+
+        return rootView;
+    }
+
+
+    protected void prepareAddingLayout(View rootView)
+    {
         cashAmmountTextView = (TextView) rootView.findViewById(R.id.cashAmmountTextView);
         nameEditText = (EditText) rootView.findViewById(R.id.nameText);
         addButton = (Button) rootView.findViewById(R.id.addButton);
@@ -50,25 +89,32 @@ public class AddFragment extends CommonFragment
 
             }
         });
-
-
+        diffrentAmount = (TextView) rootView.findViewById(R.id.diffrent_ammount);
+        diffrentAmount.setOnClickListener(onDiffrentAmmountClickListener);
         prepareCategoriesList();
         prepareCurrenciesList();
         prepareCashAmmountSeekBar();
 
         updateViews();
-        return rootView;
     }
-
-
 
     private void prepareCategoriesList()
     {
 
         try
         {
+            if(isIncome)
+            {
+                categories = new MainData().getCategoryData().getExpenseCategories();
+            }
+            else
+            {
+                categories = new MainData().getCategoryData().getIncomeCategories();
+            }
 
-            final List<Category> categories = new MainData().getCategoryData().getCategories();
+
+            //FIXME
+            categories = new MainData().getCategoryData().getAllCategories();
 
             final String categoriesArray[] = new String[categories.size()];
 
@@ -216,5 +262,12 @@ public class AddFragment extends CommonFragment
             Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onChangeAmmount(double newVal)
+    {
+        ammount.setPennies((int)(newVal*100l));
+        updateViews();
     }
 }

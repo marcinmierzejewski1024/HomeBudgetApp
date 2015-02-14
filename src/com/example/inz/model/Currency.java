@@ -29,5 +29,16 @@ public enum Currency implements Serializable
         return PLN;
     }
 
+    public static Currency getFromAbbr(String abbr)
+    {
+        try
+        {
+            return valueOf(abbr);
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
 
 }

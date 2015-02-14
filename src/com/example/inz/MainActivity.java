@@ -1,10 +1,7 @@
 package com.example.inz;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
@@ -18,9 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.example.inz.model.*;
+import com.example.inz.common.CommonActivity;
 
-public class MainActivity extends CommonActivity {
+public class MainActivity extends CommonActivity
+{
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -169,15 +167,15 @@ public class MainActivity extends CommonActivity {
             case 0:
                 fragment = new OverviewFragment();
                 break;
-            case 1:
-                fragment = new AddFragment();
-                break;
+//            case 1:
+//                fragment = new AddFragment();
+//                break;
             case 2:
                 fragment = new ExpenseFragment();
                 break;
-//            case 3:
-//                fragment = new CommunityFragment();
-//                break;
+            case 3:
+                fragment = new CurrencyExchangeFragment();
+                break;
 //            case 4:
 //                fragment = new PagesFragment();
 //                break;

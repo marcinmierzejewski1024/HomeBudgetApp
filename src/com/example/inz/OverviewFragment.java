@@ -2,9 +2,10 @@ package com.example.inz;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.*;
 import android.widget.PopupMenu;
+import com.example.inz.common.CommonActivity;
+import com.example.inz.common.CommonFragment;
 
 /**
  * Created by dom on 04/11/14.
@@ -76,20 +77,15 @@ public class OverviewFragment extends CommonFragment
     private void onAddMenuItemClick(MenuItem item)
     {
 
-        Intent i = new Intent(getActivity(),DetailActivity.class);
-
         if(item.getItemId()==AddCategories.INCOME.ordinal())
         {
-            i.putExtra(DetailActivity.FRAGMENT_KEY,DetailActivity.ADD_INCOME_FRAGMENT);
+            ((CommonActivity)getActivity()).openAddIncome();
         }
         else if(item.getItemId() == AddCategories.EXPENSE.ordinal())
         {
-            i.putExtra(DetailActivity.FRAGMENT_KEY,DetailActivity.CATEGORY_FRAGMENT);
-            i.putExtra(CategoryFragment.CATEGORY_ID_KEY,1l);
+            ((CommonActivity)getActivity()).openAddExpense();
 
         }
 
-
-        getActivity().startActivity(i);
     }
 }

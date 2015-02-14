@@ -18,6 +18,8 @@ public class Category extends AbsDatabaseItem
     String name;
     @DatabaseField()
     String hexColor;
+    @DatabaseField()
+    boolean isIncomeCategory;
 
     Category parentCategory;
 
@@ -72,22 +74,19 @@ public class Category extends AbsDatabaseItem
         this.hexColor = hexColor;
     }
 
-    public Category(String name, String hexColor, Category parentCategory)
+    public Category(String name, String hexColor, Category parentCategory, boolean isIncome)
     {
         this.name = name;
         if(hexColor != null)
+        {
             this.hexColor = hexColor;
+        }
         else
         {
            this.hexColor = getRandomColor();
         }
-            this.parentCategory = parentCategory;
-    }
-
-    public Category(String name)
-    {
-        this(name,null,null);
-
+        this.isIncomeCategory = isIncome;
+        this.parentCategory = parentCategory;
     }
 
     public Category()
@@ -105,7 +104,7 @@ public class Category extends AbsDatabaseItem
 
     public static Category getRestCategory()
     {
-        return new Category("Reszta","#555555",null);
+        return new Category("Reszta","#555555",null,false);
 
     }
 
@@ -126,5 +125,11 @@ public class Category extends AbsDatabaseItem
     public int hashCode()
     {
         return name != null ? name.hashCode() : 0;
+    }
+
+    @Override
+    public String toString()
+    {
+        return name;
     }
 }
