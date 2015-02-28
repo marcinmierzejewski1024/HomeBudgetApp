@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
     <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent" android:layout_height="match_parent">
 
@@ -11,6 +13,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/name"
             android:padding="15dp"
+            android:textStyle="bold"
             android:id="@+id/nameTextView" />
 
         <EditText
@@ -23,6 +26,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/category"
+            android:textStyle="bold"
             android:padding="15dp"
             android:id="@+id/categoryTextView" />
 
@@ -41,6 +45,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/ammount"
             android:padding="15dp"
+            android:textStyle="bold"
             android:id="@+id/ammountTextView" />
 
             <View
@@ -73,15 +78,11 @@
             android:max="300"
             />
 
-        <View android:layout_weight="1"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="inna kwota?"
+            android:textStyle="bold"
             android:id="@+id/diffrent_ammount"
             android:layout_gravity="right" />
 

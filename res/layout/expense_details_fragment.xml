@@ -4,16 +4,6 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     >
 
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/edition_mode"
-        android:layout_gravity="right|center"
-        android:id="@+id/editionMode"
-        android:checked="false"
-        android:layout_marginBottom="10dp"
-        />
-
         <LinearLayout android:id="@+id/content"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"

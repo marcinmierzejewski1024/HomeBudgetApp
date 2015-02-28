@@ -61,4 +61,5 @@
     <string name="no">Nie</string>
     <string name="yes">Tak</string>
     <string name="no_rates_found">Brak danych kursu walut</string>
+    <string name="close_editing_mode_discard_changes">Chcesz opuścic tryb edycji? (nie zapisane zmiany zostaną porzucone)</string>
 </resources>

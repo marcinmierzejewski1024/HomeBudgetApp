@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+    android:id="@+id/editionModeSwitch"
+    android:title="@string/edition_mode"
+    android:layout_gravity="right|center"
+    android:checked="false"
+    android:showAsAction="always"
+    android:actionLayout="@layout/switch_layout"
+    />
+</menu>
