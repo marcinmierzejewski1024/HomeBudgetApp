@@ -11,8 +11,21 @@
     <color name="background">#eaeaea</color>
     <color name="light_text_color">#555555</color>
     <color name="dark_text_color">#222222</color>
+
     <color name="positive_color">#7722dd22</color>
     <color name="negative_color">#77dd2222</color>
 
+    <color name="color1">#22dd22</color>
+    <color name="color2">#dd2222</color>
+    <color name="color3">#3696dd</color>
+    <color name="color4">#ddc737</color>
+    <color name="color5">#2add24</color>
+    <color name="color6">#00989a</color>
+    <color name="color7">#1a40d9</color>
+    <color name="color8">#dd7c46</color>
+    <color name="color9">#d90077</color>
+    <color name="color10">#c0dd00</color>
+    <color name="color11">#25456e</color>
+    <color name="color12">#dd17d6</color>
 
 </resources>

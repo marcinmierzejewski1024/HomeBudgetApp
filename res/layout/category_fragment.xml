@@ -12,14 +12,16 @@
         android:capitalize="characters"
         android:clickable="false"
         android:editable="false"
-        android:typeface="monospace"
         android:padding="20dp"
         android:id="@+id/categoryName"
-        />
+        android:typeface="sans" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/categoryExpenses"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        />
+
+    <include layout="@layout/empty_list_view"/>
 </LinearLayout>

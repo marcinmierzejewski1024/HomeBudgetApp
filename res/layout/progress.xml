@@ -6,22 +6,22 @@
     android:layout_height="30dp"
     android:background="@drawable/border"
     android:layout_gravity="center"
+    android:weightSum="100"
     >
 
     <View
         android:id="@+id/value"
-        android:background="@android:color/holo_green_dark"
+        android:background="@color/positive_color"
         android:layout_height="fill_parent"
-        android:layout_width="0dp"
+        android:layout_width="fill_parent"
         android:layout_gravity="left"
-        android:layout_weight="70"
+        android:layout_weight="92"
         />
+
     <View
-        android:background="@android:color/white"
+        android:background="@color/negative_color"
         android:layout_height="fill_parent"
-        android:layout_width="0dp"
-        android:layout_gravity="left"
-        android:layout_weight="100"
+        android:layout_width="fill_parent"
         />
 
 </LinearLayout>

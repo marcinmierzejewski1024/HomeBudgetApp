@@ -22,9 +22,9 @@
     <string-array name="nav_drawer_items">
         <item>Przegląd</item>
         <item>Wydatki</item>
-        <item>Raporty</item>
-        <item>Statystyki</item>
         <item>Wpływy</item>
+        <item>Statystyki</item>
+        <item>Kursy walut</item>
         <item>Ustawienia</item>
     </string-array>
 
@@ -32,11 +32,11 @@
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
         <item>@drawable/ic_home</item>
-        <item>@drawable/ic_stats</item>
-        <item>@drawable/ic_report</item>
-        <item>@drawable/ic_expense</item>
-        <item>@drawable/ic_income</item>
-        <item>@android:drawable/ic_menu_preferences</item>>
+        <item>@drawable/coin</item>
+        <item>@drawable/money_increase</item>
+        <item>@drawable/analytics</item>>
+        <item>@drawable/money_graph</item>
+        <item>@drawable/settings</item>>
     </array>
 
     <!-- Content Description -->
@@ -47,7 +47,7 @@
     <string name="name">Nazwa</string>
     <string name="category">Kategoria</string>
     <string name="ammount">Kwota</string>
-    <string name="add_success">Dodano wydatek</string>
+    <string name="add_success">Dodano</string>
     <string name="cash_ammount_is_zero">Kwota nie może byc zerowa</string>
     <string name="delete">Usun</string>
     <string name="edition_mode">tryb edycji</string>
@@ -62,4 +62,15 @@
     <string name="yes">Tak</string>
     <string name="no_rates_found">Brak danych kursu walut</string>
     <string name="close_editing_mode_discard_changes">Chcesz opuścic tryb edycji? (nie zapisane zmiany zostaną porzucone)</string>
+    <string name="sum">Suma:</string>
+    <string name="double_back_to_finish">Wcisnij wstecz ponownie żeby zamknac aplikacje</string>
+    <string name="list_is_empty">Lista jest pusta</string>
+    <string name="category_name">Nazwa kategorii</string>
+    <string name="category_type">Typ kategorii</string>
+    <string name="category_color">Kolor kategorii</string>
+    <string name="cannot_add_categort">Nie udało sie dodac kategorii</string>
+    <string name="delete_category_question">Czy chcesz usunąc kategorie?</string>
+    <string name="delete_category_success">Pomyslnie usunięto kategorie</string>
+    <string name="delete_category_failed">Nie udało się usunąc kategori</string>
+    <string name="expenses_and_incomes">Wydatki i przychody</string>
 </resources>
