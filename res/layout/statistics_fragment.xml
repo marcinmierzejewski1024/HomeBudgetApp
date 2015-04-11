@@ -9,7 +9,7 @@
             android:id="@+id/spinnerRange"
             android:spinnerMode="dropdown"
             android:entries="@array/currency_range"
-            android:padding="15dp"
+            android:padding="2dp"
             />
 
     <com.github.mikephil.charting.charts.PieChart

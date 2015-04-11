@@ -7,27 +7,28 @@ import java.io.Serializable;
  */
 public enum Currency implements Serializable
 {
-    PLN("zł", true,"PLN"),
-    USD("$", false,"USD"),
-    GBP("£", false,"GBP"),
-    EUR("€", true,"EUR");
+    PLN("zł", true,"PLN",100),
+    USD("$", false,"USD",100),
+    GBP("£", false,"GBP",100),
+    EUR("€", true,"EUR",100);
 
     public String abrevation;
     String name;
+    public int penniesSum;
     public boolean afterAmount;
 
-    Currency(String abr, boolean afterAmount,String name)
+    Currency(String abr, boolean afterAmount,String name,int pennies)
     {
         this.abrevation = abr;
         this.afterAmount = afterAmount;
         this.name = name;
+        this.penniesSum = pennies;
     }
 
 
 
     public static Currency getDefault()
     {
-        //STUB TODO:
         return PLN;
     }
 

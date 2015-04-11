@@ -82,7 +82,6 @@ public class StatisticsFragment extends CommonFragment implements OnChartValueSe
     {
 
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActivity().getActionBar().setIcon(R.drawable.ic_home);
         getActivity().invalidateOptionsMenu();
         setHasOptionsMenu(true);
 
@@ -121,6 +120,8 @@ public class StatisticsFragment extends CommonFragment implements OnChartValueSe
                     monday.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
                     since = monday.getTime();
                 }
+
+                setExpenseAndIncomeData();
 
 
             }
@@ -241,7 +242,7 @@ public class StatisticsFragment extends CommonFragment implements OnChartValueSe
             for (int i = 0; i < categoryData.size(); i++)
             {
                 if(categoryData.get(i) != null)
-                    yVals1.add(new BarEntry(categoryData.get(i).getCash().getPennies()/100f, i, categoryData.get(i)));
+                    yVals1.add(new BarEntry(categoryData.get(i).getCash().getPounds(), i, categoryData.get(i)));
             }
 
             PieDataSet pieDataSet = new PieDataSet(yVals1,"");
@@ -302,7 +303,7 @@ public class StatisticsFragment extends CommonFragment implements OnChartValueSe
         for (int i = 0; i < dataPairs.size(); i++)
         {
             if(dataPairs.get(i) != null)
-                yVals1.add(new BarEntry((dataPairs.get(i).second.getPennies()/100.0f), i, dataPairs.get(i).first));
+                yVals1.add(new BarEntry((dataPairs.get(i).second.getPounds()), i, dataPairs.get(i).first));
         }
 
         PieDataSet pieDataSet = new PieDataSet(yVals1,"");
@@ -339,8 +340,8 @@ public class StatisticsFragment extends CommonFragment implements OnChartValueSe
         CashAmmount incomeSum = new MainData().getExpenseIncomeData().getSum(since, ExpenseIncomeType.INCOME);
 
         ArrayList<Entry> yVals1 = new ArrayList<Entry>();
-        yVals1.add(new BarEntry(expensesSum.getPennies()/100,0,StatisticsState.EXPENSES));
-        yVals1.add(new BarEntry(incomeSum.getPennies()/100,1,StatisticsState.INCOMES));
+        yVals1.add(new BarEntry(expensesSum.getPounds(),0,StatisticsState.EXPENSES));
+        yVals1.add(new BarEntry(incomeSum.getPounds(),1,StatisticsState.INCOMES));
 
 
         mChart.setCenterText(getString(R.string.expenses_and_incomes));

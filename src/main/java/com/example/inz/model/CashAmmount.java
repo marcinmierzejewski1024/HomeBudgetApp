@@ -35,7 +35,7 @@ public class CashAmmount extends AbsDatabaseItem
     {
 //        if(Currency.getDefault() == currency)
 //        {
-            String ammountInCurrency = formatDecimal(pennies / 100f);
+            String ammountInCurrency = formatDecimal(pennies / (1.0f*currency.penniesSum));
 
             if (currency.afterAmount)
                 return ammountInCurrency  + currency.abrevation;
@@ -69,6 +69,11 @@ public class CashAmmount extends AbsDatabaseItem
     public Integer getPennies()
     {
         return getPennies(Currency.getDefault());
+    }
+
+    public float getPounds()
+    {
+        return Math.round(getPennies(Currency.getDefault())/currency.penniesSum*100.0)/100.0f;
     }
 
     public Integer getPennies(Currency currencyTo)
