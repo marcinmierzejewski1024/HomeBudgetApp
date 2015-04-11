@@ -52,7 +52,7 @@ public class ExpensesFragment extends CommonFragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        getActivity().registerReceiver(refreshListBroadcast, MainApp.CHANGE_EXPENSE_FILTER);
+        getActivity().registerReceiver(refreshListBroadcast, MainApp.CHANGE_DATA_FILTER);
     }
 
     @Override

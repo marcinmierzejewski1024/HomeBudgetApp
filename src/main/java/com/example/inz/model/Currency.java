@@ -9,7 +9,7 @@ public enum Currency implements Serializable
 {
     PLN("zł", true,"PLN"),
     USD("$", false,"USD"),
-    GPB("£", false,"GPB"),
+    GBP("£", false,"GBP"),
     EUR("€", true,"EUR");
 
     public String abrevation;

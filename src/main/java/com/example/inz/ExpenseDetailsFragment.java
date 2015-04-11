@@ -166,7 +166,7 @@ public class ExpenseDetailsFragment extends com.example.inz.AddFragment
         dao.getExpenseIncomeData().update(expense);
         isDataChanged = false;
 
-        getActivity().sendBroadcast(new Intent(MainApp.CHANGE_EXPENSE_BROADCAST));
+        getActivity().sendBroadcast(new Intent(MainApp.CHANGE_DATA_BROADCAST));
 
     }
 
@@ -186,7 +186,7 @@ public class ExpenseDetailsFragment extends com.example.inz.AddFragment
                     if (result)
                     {
                         Toast.makeText(getActivity(), R.string.delete_expense_success, Toast.LENGTH_SHORT).show();
-                        getActivity().sendBroadcast(new Intent(MainApp.CHANGE_EXPENSE_BROADCAST));
+                        getActivity().sendBroadcast(new Intent(MainApp.CHANGE_DATA_BROADCAST));
                         getActivity().finish();
                     } else
                     {

@@ -292,7 +292,7 @@ public class AddFragment extends CommonFragment implements DiffrentAmmountDialog
             dao.getExpenseIncomeData().store(newExpense);
             Toast.makeText(getActivity().getApplication(), R.string.add_success,Toast.LENGTH_LONG).show();
 
-            getActivity().sendBroadcast(new Intent(MainApp.CHANGE_EXPENSE_BROADCAST));
+            getActivity().sendBroadcast(new Intent(MainApp.CHANGE_DATA_BROADCAST));
             getActivity().finish();
 
         }

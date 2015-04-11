@@ -55,57 +55,7 @@ public class MainData
 		}
 	}
 
-    private void addPredefinedExchangeRates() throws SQLException
-    {
 
-
-
-        Date nov2013 = new Date(1312827852000l);
-        CurrencyExchangeRate rate01 = new CurrencyExchangeRate(nov2013,Currency.PLN,Currency.EUR,0.278325964);
-        CurrencyExchangeRate rate02 = new CurrencyExchangeRate(nov2013,Currency.PLN,Currency.GPB,0.1448687936);
-        CurrencyExchangeRate rate03 = new CurrencyExchangeRate(nov2013,Currency.PLN,Currency.USD,0.24981191);
-        CurrencyExchangeRate rate04 = new CurrencyExchangeRate(nov2013,Currency.EUR,Currency.GPB,0.7858287258);
-        CurrencyExchangeRate rate05 = new CurrencyExchangeRate(nov2013,Currency.EUR,Currency.USD,1.38895);
-        CurrencyExchangeRate rate06 = new CurrencyExchangeRate(nov2013,Currency.GPB,Currency.USD,1.769214);
-
-
-        Date nov2014 = new Date(1414877852000l);
-        CurrencyExchangeRate rate1 = new CurrencyExchangeRate(nov2014,Currency.PLN,Currency.EUR,0.238325964);
-        CurrencyExchangeRate rate2 = new CurrencyExchangeRate(nov2014,Currency.PLN,Currency.GPB,0.1848687936);
-        CurrencyExchangeRate rate3 = new CurrencyExchangeRate(nov2014,Currency.PLN,Currency.USD,0.29981191);
-        CurrencyExchangeRate rate4 = new CurrencyExchangeRate(nov2014,Currency.EUR,Currency.GPB,0.7558287258);
-        CurrencyExchangeRate rate5 = new CurrencyExchangeRate(nov2014,Currency.EUR,Currency.USD,1.18895);
-        CurrencyExchangeRate rate6 = new CurrencyExchangeRate(nov2014,Currency.GPB,Currency.USD,1.469214);
-
-        Date dec2014 = new Date(1417469852000l);
-        CurrencyExchangeRate rate7 = new CurrencyExchangeRate(dec2014,Currency.PLN,Currency.EUR,0.238155964);
-        CurrencyExchangeRate rate8 = new CurrencyExchangeRate(dec2014,Currency.PLN,Currency.GPB,0.188687936);
-        CurrencyExchangeRate rate9 = new CurrencyExchangeRate(dec2014,Currency.PLN,Currency.USD,0.296191);
-        CurrencyExchangeRate rate10 = new CurrencyExchangeRate(dec2014,Currency.EUR,Currency.GPB,0.792287258);
-        CurrencyExchangeRate rate11 = new CurrencyExchangeRate(dec2014,Currency.EUR,Currency.USD,1.243685);
-        CurrencyExchangeRate rate12 = new CurrencyExchangeRate(dec2014,Currency.GPB,Currency.USD,1.56974);
-
-
-
-        getExchangeRateData().storeRate(rate01);
-        getExchangeRateData().storeRate(rate02);
-        getExchangeRateData().storeRate(rate03);
-        getExchangeRateData().storeRate(rate04);
-        getExchangeRateData().storeRate(rate05);
-        getExchangeRateData().storeRate(rate06);
-        getExchangeRateData().storeRate(rate1);
-        getExchangeRateData().storeRate(rate2);
-        getExchangeRateData().storeRate(rate3);
-        getExchangeRateData().storeRate(rate4);
-        getExchangeRateData().storeRate(rate5);
-        getExchangeRateData().storeRate(rate6);
-        getExchangeRateData().storeRate(rate7);
-        getExchangeRateData().storeRate(rate8);
-        getExchangeRateData().storeRate(rate9);
-        getExchangeRateData().storeRate(rate10);
-        getExchangeRateData().storeRate(rate11);
-        getExchangeRateData().storeRate(rate12);
-    }
 
     private void addPredefinedCategories() throws SQLException
     {

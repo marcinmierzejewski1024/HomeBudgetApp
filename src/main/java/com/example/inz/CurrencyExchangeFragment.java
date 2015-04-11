@@ -27,7 +27,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 /**
@@ -49,8 +48,7 @@ public class CurrencyExchangeFragment extends CommonFragment implements
         }
     };
 
-    enum Period{YEAR,MONTH,WEEK};
-    Period period = Period.YEAR;
+    TimePeriod period = TimePeriod.YEAR;
 
     CurrencyExchangeRateData dao = new MainData().getExchangeRateData();
     Currency currency = Currency.USD;
@@ -81,7 +79,7 @@ public class CurrencyExchangeFragment extends CommonFragment implements
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                period = Period.values()[position];
+                period = TimePeriod.values()[position];
                 setData();
             }
 
@@ -156,7 +154,7 @@ public class CurrencyExchangeFragment extends CommonFragment implements
 
     private void setData() {
 
-        if(period == Period.YEAR)
+        if(period == TimePeriod.YEAR)
         {
             String[] months = getResources().getStringArray(R.array.months_abbr);
             ArrayList<String> xVals = new ArrayList<String>();
@@ -166,8 +164,9 @@ public class CurrencyExchangeFragment extends CommonFragment implements
             }
 
             ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+            int year = Calendar.getInstance().get(Calendar.YEAR);
 
-            rates = dao.getRatingsFromYearMonthly(2015, currency, Currency.getDefault());
+            rates = dao.getRatingsFromYearMonthly(year, currency, Currency.getDefault());
 
             for (int i = 0; i < 12; i++) {
 
@@ -201,7 +200,7 @@ public class CurrencyExchangeFragment extends CommonFragment implements
             mChart.clear();
             mChart.setData(data);
         }
-        else if(period == Period.MONTH)
+        else if(period == TimePeriod.MONTH)
         {
             ArrayList<String> days= new ArrayList<String>();
             Calendar c = Calendar.getInstance();
@@ -254,7 +253,7 @@ public class CurrencyExchangeFragment extends CommonFragment implements
             mChart.clear();
             mChart.setData(data);
         }
-        else if(period == Period.WEEK)
+        else if(period == TimePeriod.WEEK)
         {
             String[] weekDays = getResources().getStringArray(R.array.weekday_abbr);
             ArrayList<String> xVals = new ArrayList<String>();
@@ -277,7 +276,7 @@ public class CurrencyExchangeFragment extends CommonFragment implements
                     val = (float) rates.get(i).getRate();
 
 
-                yVals1.add(new Entry(val,i));
+                yVals1.add(new Entry(val, i));
             }
 
             LineDataSet set1 = new LineDataSet(yVals1, Currency.getDefault()+" -> "+currency.name());
@@ -320,7 +319,7 @@ public class CurrencyExchangeFragment extends CommonFragment implements
         TextView date = (TextView) toastLayout.findViewById(R.id.date_text);
 
         int ratesIndex = h.getXIndex();
-        if(period == Period.MONTH)
+        if(period == TimePeriod.MONTH)
             ratesIndex++;
 
         if(rates.get(ratesIndex) != null)

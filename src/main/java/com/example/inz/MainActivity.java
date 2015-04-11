@@ -56,7 +56,6 @@ public class MainActivity extends CommonActivity
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
 
         navMenuIcons.recycle();
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
@@ -166,9 +165,9 @@ public class MainActivity extends CommonActivity
             case 4:
                 fragment = new CurrencyExchangeFragment();
                 break;
-            case 5:
-                fragment = new SettingsFragment();
-                break;
+//            case 5:
+//                fragment = new SettingsFragment();
+//                break;
 
             default:
                 break;
@@ -179,10 +178,10 @@ public class MainActivity extends CommonActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, fragment).commit();
 
-            // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);
             setTitle(navMenuTitles[position]);
+            getActionBar().setIcon(navDrawerItems.get(position).getIcon());
             mDrawerLayout.closeDrawer(mDrawerList);
         } else {
 

@@ -1,14 +1,11 @@
 package com.example.inz;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.util.Pair;
-import com.example.inz.model.Category;
-import com.example.inz.model.MainData;
 import com.example.inz.services.CurrencyExchangeDownloadService;
-import com.example.inz.services.ExchangeCurrencyCallback;
 
 import java.util.*;
 
@@ -18,8 +15,8 @@ import java.util.*;
 public class MainApp extends Application
 {
     private static Context context;
-    public final static String CHANGE_EXPENSE_BROADCAST = "CHANGE_EXPENSE_FILTER";
-    public final static android.content.IntentFilter CHANGE_EXPENSE_FILTER = new IntentFilter(CHANGE_EXPENSE_BROADCAST);
+    public final static String CHANGE_DATA_BROADCAST = "CHANGE_DATA_FILTER";
+    public final static android.content.IntentFilter CHANGE_DATA_FILTER = new IntentFilter(CHANGE_DATA_BROADCAST);
 
 
     @Override
@@ -49,5 +46,13 @@ public class MainApp extends Application
         return cal.getTime();
     }
 
-
+    public boolean isDownloadingServiceRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (CurrencyExchangeDownloadService.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

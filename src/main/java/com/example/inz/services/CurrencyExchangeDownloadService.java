@@ -448,17 +448,19 @@ public class CurrencyExchangeDownloadService extends IntentService
 
     public static void downloadExchangeRatesFrom2LastYears()
     {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
 
 
         for(Pair<String,Date> filenameAndDate : CurrencyExchangeDownloadService.getLastDaysFilenames(30))
         {
             CurrencyExchangeDownloadService.requestExchangeRatesFromFilename(filenameAndDate.first,filenameAndDate.second);
         }
-        for(Pair<String,Date> filenameAndDate : CurrencyExchangeDownloadService.getMonthAvalibleFilenames(2015))
+        for(Pair<String,Date> filenameAndDate : CurrencyExchangeDownloadService.getMonthAvalibleFilenames(year))
         {
             CurrencyExchangeDownloadService.requestExchangeRatesFromFilename(filenameAndDate.first,filenameAndDate.second);
         }
-        for(Pair<String,Date> filenameAndDate : CurrencyExchangeDownloadService.getMonthAvalibleFilenames(2014))
+        for(Pair<String,Date> filenameAndDate : CurrencyExchangeDownloadService.getMonthAvalibleFilenames(year-1))
         {
             CurrencyExchangeDownloadService.requestExchangeRatesFromFilename(filenameAndDate.first,filenameAndDate.second);
         }

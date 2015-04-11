@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import com.example.inz.common.CommonActivity;
 import com.example.inz.common.CommonFragment;
 import com.example.inz.model.*;
@@ -21,6 +23,7 @@ import com.github.mikephil.charting.utils.ValueFormatter;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +38,9 @@ public class StatisticsFragment extends CommonFragment implements OnChartValueSe
 
     StatisticsState state = StatisticsState.EXPENSES_AND_INCOMES;
 
+
+    TimePeriod period = TimePeriod.MONTH;
+    private Spinner periodSpinner;
     View rootView;
     PieChart mChart;
     Date since = new Date(0l);
@@ -60,7 +66,7 @@ public class StatisticsFragment extends CommonFragment implements OnChartValueSe
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        getActivity().registerReceiver(refreshListBroadcast, MainApp.CHANGE_EXPENSE_FILTER);
+        getActivity().registerReceiver(refreshListBroadcast, MainApp.CHANGE_DATA_FILTER);
     }
 
     @Override
@@ -80,7 +86,51 @@ public class StatisticsFragment extends CommonFragment implements OnChartValueSe
         getActivity().invalidateOptionsMenu();
         setHasOptionsMenu(true);
 
+
+
         rootView = inflater.inflate(R.layout.statistics_fragment,container,false);
+        periodSpinner = (Spinner) rootView.findViewById(R.id.spinnerRange);
+
+        ArrayAdapter periodArrayAdapter = new ArrayAdapter(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item, getResources().getTextArray(R.array.currency_range));
+        periodSpinner.setAdapter(periodArrayAdapter);
+        periodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                period = TimePeriod.values()[position];
+
+                if((period == TimePeriod.YEAR))
+                {
+
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.clear();
+                    calendar.set(Calendar.MONTH, 0);
+                    calendar.set(Calendar.DAY_OF_MONTH, 1);
+                    since = calendar.getTime();
+                }
+                else if(period == TimePeriod.MONTH)
+                {
+                    since = MainApp.getFirstDayOfMonth();
+                }
+                else if(period == TimePeriod.WEEK)
+                {
+
+                    Calendar monday = Calendar.getInstance();
+                    monday.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                    since = monday.getTime();
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
 
 
         createPieChart();

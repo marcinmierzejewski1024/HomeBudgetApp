@@ -51,7 +51,7 @@ public class AddCategoryFragment extends Fragment implements View.OnClickListene
                 Category newCategory = new Category(name,null,null,isIncome);
                 new MainData().getCategoryData().storeCategory(newCategory);
                 Toast.makeText(getActivity(),getString(R.string.add_success),Toast.LENGTH_SHORT).show();
-                getActivity().sendBroadcast(new Intent(MainApp.CHANGE_EXPENSE_BROADCAST));
+                getActivity().sendBroadcast(new Intent(MainApp.CHANGE_DATA_BROADCAST));
 
                 getActivity().finish();
 

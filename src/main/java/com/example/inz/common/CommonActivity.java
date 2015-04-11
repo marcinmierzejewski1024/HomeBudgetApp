@@ -159,7 +159,7 @@ public abstract class CommonActivity extends Activity
                     if (result)
                     {
                         Toast.makeText(CommonActivity.this, R.string.delete_category_success, Toast.LENGTH_SHORT).show();
-                        sendBroadcast(new Intent(MainApp.CHANGE_EXPENSE_BROADCAST));
+                        sendBroadcast(new Intent(MainApp.CHANGE_DATA_BROADCAST));
 
                     } else
                     {
