@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,8 +75,8 @@ public class CategoryFragment extends CommonFragment
 
 
         categoryName.setText(data.getName());
-        categoryName.setBackground(new ColorDrawable(Color.parseColor(data.getHexColor())));
 
+        categoryName.setBackgroundDrawable(new ColorDrawable(Color.parseColor(data.getHexColor())));
         ExpenseIncome[] arr = {};
         categoryExpenses.setAdapter(new ExpenseAdapter(getActivity(), expenses.toArray(arr)));
         categoryExpenses.setOnItemClickListener(new AdapterView.OnItemClickListener()

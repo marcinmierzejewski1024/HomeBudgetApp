@@ -31,7 +31,7 @@ public class DetailActivity extends CommonActivity implements DiffrentAmmountDia
         getActionBar().setDisplayHomeAsUpEnabled(true);
         //getActionBar().setIcon(R.drawable.ic_launcher);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.without_drawer);
 
 
         try

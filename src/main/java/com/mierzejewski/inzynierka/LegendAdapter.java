@@ -3,6 +3,7 @@ package com.mierzejewski.inzynierka;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,8 +62,14 @@ public class LegendAdapter extends ArrayAdapter<Pair<Category,CashAmmount>> {
         categoryName.setText(values[position].first.getName());
         categorySum.setText(values[position].second.toString());
 
-        colorView.setBackground(new ColorDrawable(Color.parseColor(values[position].first.getHexColor())));
-
+        if(Build.VERSION.SDK_INT > 15)
+        {
+            colorView.setBackground(new ColorDrawable(Color.parseColor(values[position].first.getHexColor())));
+        }
+        else
+        {
+            colorView.setBackgroundDrawable(new ColorDrawable(Color.parseColor(values[position].first.getHexColor())));
+        }
 
         return rowView;
     }

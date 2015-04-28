@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import com.mierzejewski.inzynierka.services.CurrencyExchangeDownloadService;
 
 import java.util.*;
@@ -25,9 +26,15 @@ public class MainApp extends Application
         super.onCreate();
         context = getApplicationContext();
 
-        startService(new Intent(context, CurrencyExchangeDownloadService.class));
+        new AsyncTask(){
+            @Override
+            protected Object doInBackground(Object[] params)
+            {
 
-        CurrencyExchangeDownloadService.downloadExchangeRatesFrom2LastYears();
+                CurrencyExchangeDownloadService.downloadExchangeRatesFrom2LastYears();
+                return null;
+            }
+        }.execute();
 
 
 
