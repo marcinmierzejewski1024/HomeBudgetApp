@@ -6,6 +6,8 @@ import com.mierzejewski.inzynierka.MainApp;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.mierzejewski.inzynierka.R;
+
 import java.sql.SQLException;
 import java.util.*;
 
@@ -59,20 +61,20 @@ public class MainData
 
     private void addPredefinedCategories() throws SQLException
     {
-        Category cat0 = new Category("Mieszkanie","#12aaee",null,false);
-        Category cat1 = new Category("Transport","#aacc44",null,false);
-        Category cat2 = new Category("Jedzenie","#a14897",null,false);
-        Category cat3 = new Category("Rozrywka","#13a412",null,false);
-        Category cat4 = new Category("Edukacja","#658732",null,false);
-        Category cat5 = new Category("Rachunki","#98563f",null,false);
-        Category cat6 = new Category("Pożyczki","#dd5544",null,false);
+        Category cat0 = new Category(MainApp.getAppContext().getString(R.string.house),"#12aaee",null,false);
+        Category cat1 = new Category(MainApp.getAppContext().getString(R.string.transport),"#aacc44",null,false);
+        Category cat2 = new Category(MainApp.getAppContext().getString(R.string.food),"#a14897",null,false);
+        Category cat3 = new Category(MainApp.getAppContext().getString(R.string.entierement),"#13a412",null,false);
+        Category cat4 = new Category(MainApp.getAppContext().getString(R.string.education),"#658732",null,false);
+        Category cat5 = new Category(MainApp.getAppContext().getString(R.string.bills),"#98563f",null,false);
+        Category cat6 = new Category(MainApp.getAppContext().getString(R.string.loans),"#dd5544",null,false);
 
 
-        Category cat7 = new Category("Praca","#4da4dd",null,true);
-        Category cat8 = new Category("Pożyczka","#eeaa33",null,true);
-        Category cat9 = new Category("Prezent","#438723",null,true);
-        Category cat10 = new Category("Inwestycje","#997723",null,true);
-        Category cat11 = new Category("Inne","#f12ea1",null,true);
+        Category cat7 = new Category(MainApp.getAppContext().getString(R.string.job),"#4da4dd",null,true);
+        Category cat8 = new Category(MainApp.getAppContext().getString(R.string.loan),"#eeaa33",null,true);
+        Category cat9 = new Category(MainApp.getAppContext().getString(R.string.present),"#438723",null,true);
+        Category cat10 = new Category(MainApp.getAppContext().getString(R.string.investitions),"#997723",null,true);
+        Category cat11 = new Category(MainApp.getAppContext().getString(R.string.other),"#f12ea1",null,true);
 
 
         getCategoryData().storeCategory(cat0);

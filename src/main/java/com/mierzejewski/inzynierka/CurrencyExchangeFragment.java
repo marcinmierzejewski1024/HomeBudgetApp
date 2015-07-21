@@ -44,7 +44,7 @@ public class CurrencyExchangeFragment extends CommonFragment implements
         @Override
         public String getFormattedValue(float value)
         {
-            return String.format("%.2f", value)+Currency.getDefault().abrevation;
+            return String.format("%.2f", value)+Currency.getDefault().symbol;
         }
     };
 
@@ -167,6 +167,8 @@ public class CurrencyExchangeFragment extends CommonFragment implements
             int year = Calendar.getInstance().get(Calendar.YEAR);
 
             rates = dao.getRatingsFromYearMonthly(year, currency, Currency.getDefault());
+            if(rates == null)
+                return;
 
             for (int i = 0; i < 12; i++) {
 

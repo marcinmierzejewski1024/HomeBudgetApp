@@ -25,20 +25,7 @@ public class MainApp extends Application
     {
         super.onCreate();
         context = getApplicationContext();
-
-        new AsyncTask(){
-            @Override
-            protected Object doInBackground(Object[] params)
-            {
-
-                CurrencyExchangeDownloadService.downloadExchangeRatesFrom2LastYears();
-                return null;
-            }
-        }.execute();
-
-
-
-//        new MainData().dataBaseExporter.backup();
+        CurrencyExchangeDownloadService.startService(context);
     }
 
     public static Context getAppContext()

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/avalible_resources"
+        android:text="@string/this_month"
         android:id="@+id/textView"
         android:singleLine="false"
         android:padding="10dp"
@@ -28,31 +28,6 @@
         android:padding="10dp" />
 
 </LinearLayout>
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        >
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/free_budget"
-            android:singleLine="false"
-            android:padding="10dp"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="1070 zł"
-            android:id="@+id/free_budget_value"
-            android:textStyle="bold"
-            android:singleLine="false"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:padding="10dp" />
-    </LinearLayout>
 
     <include layout="@layout/divider" />
 

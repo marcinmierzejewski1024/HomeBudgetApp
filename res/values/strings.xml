@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Domowy Budżet</string>
-    <string name="avalible_resources">Dostępne środki</string>
-    <string name="transaction">Tranzakcje</string>
-    <string name="budget">Budżet</string>
-    <string name="income">Przychody</string>
+    <string name="app_name">Home budget</string>
+    <string name="this_month">This month</string>
+    <string name="transaction">Transaction</string>
+    <string name="budget">budget</string>
+    <string name="income">Incomes</string>
     <string name="free_budget">Wolne środki</string>
-    <string name="expense">Wydatki</string>
+    <string name="expense">Expenses</string>
 
-    <string name="add">Dodaj</string>
-    <string name="general_settings">Ustawienia ogólne</string>
+    <string name="add">Add</string>
+    <string name="general_settings">Settings</string>
 
 
 
@@ -20,12 +20,12 @@
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
-        <item>Przegląd</item>
-        <item>Wydatki</item>
-        <item>Wpływy</item>
-        <item>Statystyki</item>
-        <item>Kursy walut</item>
-        <item>Ustawienia</item>
+        <item>Start</item>
+        <item>Expenses</item>
+        <item>Incomes</item>
+        <item>Stats</item>
+        <item>Exchange rates</item>
+        <item>Settings</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
@@ -41,36 +41,51 @@
 
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
-    <string name="currency_title">Domyślna waluta</string>
+    <string name="currency_title">Default currency</string>
     <string name="currency_key">currency_key</string>
-    <string name="add_income">Dodaj przychód</string>
-    <string name="name">Nazwa</string>
-    <string name="category">Kategoria</string>
-    <string name="ammount">Kwota</string>
-    <string name="add_success">Dodano</string>
-    <string name="cash_ammount_is_zero">Kwota nie może byc zerowa</string>
-    <string name="delete">Usun</string>
-    <string name="edition_mode">tryb edycji</string>
-    <string name="save">Zapisz</string>
-    <string name="changes_saved">Zapisano zmiany</string>
-    <string name="changes_saved_failed">Nie udało sie zapisac zmian</string>
-    <string name="diffrent_ammount">Inna kwota</string>
-    <string name="delete_expense_question">Czy napewno chcesz usunąc wydatek?</string>
-    <string name="delete_expense_success">Usunięto wydatek</string>
-    <string name="delete_expense_failed">Nie udało się usunąc wydatku</string>
-    <string name="no">Nie</string>
-    <string name="yes">Tak</string>
-    <string name="no_rates_found">Brak danych kursu walut</string>
-    <string name="close_editing_mode_discard_changes">Chcesz opuścic tryb edycji? (nie zapisane zmiany zostaną porzucone)</string>
-    <string name="sum">Suma:</string>
-    <string name="double_back_to_finish">Wcisnij wstecz ponownie żeby zamknac aplikacje</string>
-    <string name="list_is_empty">Lista jest pusta</string>
-    <string name="category_name">Nazwa kategorii</string>
-    <string name="category_type">Typ kategorii</string>
-    <string name="category_color">Kolor kategorii</string>
-    <string name="cannot_add_categort">Nie udało sie dodac kategorii</string>
-    <string name="delete_category_question">Czy chcesz usunąc kategorie?</string>
-    <string name="delete_category_success">Pomyslnie usunięto kategorie</string>
-    <string name="delete_category_failed">Nie udało się usunąc kategori</string>
-    <string name="expenses_and_incomes">Wydatki i przychody</string>
+    <string name="add_income">Add income</string>
+    <string name="name">Name</string>
+    <string name="category">Category</string>
+    <string name="ammount">Ammount</string>
+    <string name="add_success">Add success</string>
+    <string name="cash_ammount_is_zero">Ammount can\'t be zero</string>
+    <string name="delete">Delete</string>
+    <string name="edition_mode">edition mode</string>
+    <string name="save">Save</string>
+    <string name="changes_saved">Changes saved</string>
+    <string name="changes_saved_failed">Changes saving failed</string>
+    <string name="diffrent_ammount">Diffrent ammount</string>
+    <string name="delete_expense_question">Are You sure?</string>
+    <string name="delete_expense_success">Delete expense success</string>
+    <string name="delete_expense_failed">Deleting expense failed</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="no_rates_found">No exchanges rates data found</string>
+    <string name="close_editing_mode_discard_changes">Leave unsaved changes?</string>
+    <string name="sum">Sum:</string>
+    <string name="double_back_to_finish">press back again to close application</string>
+    <string name="list_is_empty">List is empty: (</string>
+    <string name="category_name">Category name</string>
+    <string name="category_type">Category type</string>
+    <string name="category_color">Category color</string>
+    <string name="cannot_add_categort">Can\'t add new category</string>
+    <string name="delete_category_question">Delete category?</string>
+    <string name="delete_category_success">category deleted</string>
+    <string name="delete_category_failed">category deletion failed</string>
+    <string name="expenses_and_incomes">Expenses and Incomes</string>
+
+    <string name="house">house</string>
+    <string name="transport">transport</string>
+    <string name="food">food</string>
+    <string name="entierement">entierement</string>
+    <string name="education">education</string>
+    <string name="bills">bills</string>
+    <string name="loans">loans</string>
+
+
+    <string name="job">job</string>
+    <string name="loan">loan</string>
+    <string name="present">present</string>
+    <string name="investitions">investition</string>
+    <string name="other">other</string>
 </resources>

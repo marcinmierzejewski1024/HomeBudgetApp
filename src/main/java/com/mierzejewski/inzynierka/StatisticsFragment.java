@@ -49,7 +49,7 @@ public class StatisticsFragment extends CommonFragment implements OnChartValueSe
         @Override
         public String getFormattedValue(float value)
         {
-            return String.format("%.2f", value)+Currency.getDefault().abrevation;
+            return String.format("%.2f", value)+Currency.getDefault().symbol;
         }
     };
 

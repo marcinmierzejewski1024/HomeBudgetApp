@@ -2,6 +2,7 @@ package com.mierzejewski.inzynierka.model;
 
 import android.util.Log;
 import android.util.Pair;
+import android.widget.Toast;
 import com.mierzejewski.inzynierka.MainApp;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.misc.TransactionManager;
@@ -63,6 +64,21 @@ public class CurrencyExchangeRateData extends BaseData
             reversedResultList = qb.orderBy("exchangeDate",true).where().eq("from", to).and().eq("to", from).and().gt("exchangeDate", monday.getTime()).query();
 
 
+            if(resultList == null && reversedResultList == null || resultList.size()==0 && reversedResultList.size() == 0)
+            {
+
+                //przejscie przez euro
+                List<CurrencyExchangeRate> howManyEuro = qb.orderBy("exchangeDate", true).where().eq("from", from).and().eq("to", Currency.EUR).and().gt("exchangeDate", monday.getTime()).query();
+                resultList = qb.orderBy("exchangeDate",true).where().eq("from", to).and().eq("to", Currency.EUR).and().gt("exchangeDate", monday.getTime()).query();
+
+                for(int i=0;i<resultList.size();i++)
+                {
+                    resultList.get(i).setRate(howManyEuro.get(i).getRate()/resultList.get(i).getRate());
+                    resultList.get(i).setTo(to);
+                    resultList.get(i).setFrom(from);
+                }
+            }
+
             for(CurrencyExchangeRate reversedRate:reversedResultList)
             {
                 from = reversedRate.getFrom();
@@ -99,6 +115,20 @@ public class CurrencyExchangeRateData extends BaseData
             resultList = qb.orderBy("exchangeDate",true).where().eq("from", from).and().eq("to", to).and().gt("exchangeDate", monthStart).query();
             reversedResultList = qb.orderBy("exchangeDate",true).where().eq("from", to).and().eq("to", from).and().gt("exchangeDate", monthStart).query();
 
+            if(resultList == null && reversedResultList == null || resultList.size()==0 && reversedResultList.size() == 0)
+            {
+
+                //przejscie przez euro
+                List<CurrencyExchangeRate> howManyEuro = qb.orderBy("exchangeDate", true).where().eq("from", from).and().eq("to", Currency.EUR).and().gt("exchangeDate", monthStart).query();
+                resultList = qb.orderBy("exchangeDate",true).where().eq("from", to).and().eq("to", Currency.EUR).and().gt("exchangeDate", monthStart).query();
+
+                for(int i=0;i<resultList.size();i++)
+                {
+                    resultList.get(i).setRate(howManyEuro.get(i).getRate()/resultList.get(i).getRate());
+                    resultList.get(i).setTo(to);
+                    resultList.get(i).setFrom(from);
+                }
+            }
 
             for(CurrencyExchangeRate reversedRate:reversedResultList)
             {
@@ -142,6 +172,22 @@ public class CurrencyExchangeRateData extends BaseData
             resultList = qb.orderBy("exchangeDate",true).where().eq("from", from).and().eq("to", to).and().gt("exchangeDate", yearStart).query();
             reversedResultList = qb.orderBy("exchangeDate",true).where().eq("from", to).and().eq("to", from).and().gt("exchangeDate", yearStart).query();
 
+
+            if(resultList == null && reversedResultList == null || resultList.size()==0 && reversedResultList.size() == 0)
+            {
+
+                //przejscie przez euro
+                List<CurrencyExchangeRate> howManyEuro = qb.orderBy("exchangeDate", true).where().eq("from", from).and().eq("to", Currency.EUR).and().gt("exchangeDate", yearStart).query();
+                resultList = qb.orderBy("exchangeDate",true).where().eq("from", to).and().eq("to", Currency.EUR).and().gt("exchangeDate", yearStart).query();
+
+                for(int i=0;i<resultList.size();i++)
+                {
+                    resultList.get(i).setRate(howManyEuro.get(i).getRate()/resultList.get(i).getRate());
+                    resultList.get(i).setTo(to);
+                    resultList.get(i).setFrom(from);
+                }
+            }
+
             for(CurrencyExchangeRate reversedRate:reversedResultList)
             {
                 from = reversedRate.getFrom();
@@ -150,6 +196,7 @@ public class CurrencyExchangeRateData extends BaseData
                 reversedRate.setRate(1.0/reversedRate.getRate());
                 resultList.add(reversedRate);
             }
+
 
             Collections.sort(resultList, currencyDateComparator);
 
@@ -192,35 +239,6 @@ public class CurrencyExchangeRateData extends BaseData
         }
     }
 
-    public Pair<Float,Float> getMinAndMax(Currency from,Currency to,int percentOfMargin)
-    {
-        try
-        {
-            final QueryBuilder<CurrencyExchangeRate, Long> qb = getDao().queryBuilder();
-            CurrencyExchangeRate min = qb.orderBy("rate",true).where().eq("from", from).and().eq("to", to).queryForFirst();
-            CurrencyExchangeRate max = qb.orderBy("rate",false).where().eq("from", from).and().eq("to", to).queryForFirst();
-
-            float minValue,maxValue;
-            if(min==null || max == null)
-            {
-                minValue = 0;
-                maxValue = 1;
-            }
-            else
-            {
-                minValue = (float) ((100 - percentOfMargin) / 100.0 * min.getRate());
-                maxValue = (float) ((100 + percentOfMargin) / 100.0 * max.getRate());
-            }
-
-            Pair<Float,Float> result = new Pair<Float, Float>(minValue,maxValue);
-            return result;
-        }
-        catch (Exception e)
-        {
-            Log.e("CurrenctExchangeRateDAta","GetMinMax",e);
-            return null;
-        }
-    }
 
     private Dao<CurrencyExchangeRate, Long> getDao()
             throws SQLException
@@ -240,8 +258,14 @@ public class CurrencyExchangeRateData extends BaseData
             if(result == null)
             {
                 result = qb.where().eq("from", to).and().eq("to", from).queryForFirst();
-                result.setRate(1.0/result.getRate());
+                if(result != null)
+                {
+                    result.setRate(1.0 / result.getRate());
+                }
+
+
             }
+
 
             result.setStoredInDb(true);
             return result.getRate();

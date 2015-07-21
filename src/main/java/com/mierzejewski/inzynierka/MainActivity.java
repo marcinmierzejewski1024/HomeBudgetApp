@@ -57,6 +57,8 @@ public class MainActivity extends CommonActivity
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
+
         navMenuIcons.recycle();
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
@@ -165,9 +167,9 @@ public class MainActivity extends CommonActivity
             case 4:
                 fragment = new CurrencyExchangeFragment();
                 break;
-//            case 5:
-//                fragment = new SettingsFragment();
-//                break;
+            case 5:
+                fragment = new SettingsFragment();
+                break;
 
             default:
                 break;

@@ -20,7 +20,6 @@ public class OverviewFragment extends CommonFragment
 
     Date since;
 
-    TextView freeBudgetText;
     View expenseProgress;
     TextView outcomeText;
     TextView incomeText;
@@ -33,7 +32,6 @@ public class OverviewFragment extends CommonFragment
         since = MainApp.getFirstDayOfMonth();
 
         rootView = inflater.inflate(R.layout.overview, container, false);
-        freeBudgetText= (TextView) rootView.findViewById(R.id.free_budget_value);
         expenseProgress = rootView.findViewById(R.id.expense_progress);
         outcomeText = (TextView) rootView.findViewById(R.id.outcome_text);
         incomeText = (TextView) rootView.findViewById(R.id.income_text);
@@ -56,9 +54,6 @@ public class OverviewFragment extends CommonFragment
         expenseProgress.findViewById(R.id.value).setLayoutParams(params);
         expenseProgress.findViewById(R.id.value).invalidate();
 
-        CashAmmount freeBudget = new CashAmmount(incomeSum.getPennies() - expensesSum.getPennies(), Currency.getDefault());
-
-        freeBudgetText.setText(""+freeBudget);
 
         DateFormat fmt = new SimpleDateFormat("MMMM yyyy",getResources().getConfiguration().locale);
         monthText.setText(fmt.format(since));

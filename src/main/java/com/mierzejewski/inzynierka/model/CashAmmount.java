@@ -35,9 +35,9 @@ public class CashAmmount extends AbsDatabaseItem
             String ammountInCurrency = formatDecimal(pennies / (1.0f*currency.penniesSum));
 
             if (currency.afterAmount)
-                return ammountInCurrency  + currency.abrevation;
+                return ammountInCurrency  + currency.symbol;
             else
-                return currency.abrevation + ammountInCurrency;
+                return currency.symbol + ammountInCurrency;
 //        }
     }
 
