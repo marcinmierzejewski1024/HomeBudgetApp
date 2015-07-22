@@ -37,6 +37,20 @@ public class CurrencyExchangeRateData extends BaseData
         }
     };
 
+    public boolean haveDateFromDay(Date date) throws SQLException
+    {
+
+        final QueryBuilder<CurrencyExchangeRate, Long> qb = getDao().queryBuilder();
+        List<CurrencyExchangeRate> results = qb.where().eq("from", Currency.USD).and().eq("to", Currency.EUR).and().eq("exchangeDate", date).query();
+
+        if(results == null || results.size() == 0 )
+        {
+            return false;
+        }
+
+        return true;
+    }
+
 
     public class ExchangeRateNotFoundExcepction extends Exception{};
 

@@ -33,7 +33,7 @@ public class AddFragment extends CommonFragment implements DiffrentAmmountDialog
     Button addButton;
 
 
-    CashAmmount ammount = new CashAmmount(0,Currency.values()[0]);
+    CashAmmount ammount = new CashAmmount(0,Currency.getDefault());
 
     Category category = null;
     private List<Category> categories;
@@ -188,7 +188,11 @@ public class AddFragment extends CommonFragment implements DiffrentAmmountDialog
     protected void prepareCashAmmountSeekBar()
     {
         cashAmmountSeekBar = (SeekBar) rootView.findViewById(R.id.cashAmmountSeekBar);
-
+        if(cashAmmountSeekBar == null)
+        {
+            ((DetailActivity) getActivity()).onBackPressed();
+            return;
+        }
         cashAmmountSeekBar.setProgress(penniesToProgress(ammount.getPennies()));
         cashAmmountSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {

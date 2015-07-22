@@ -18,6 +18,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -121,6 +122,19 @@ public class CurrencyExchangeDownloadService extends IntentService
                                 //zmiana daty 2015-04-24
                                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                                 exchangeDate = format.parse(attributeValue);
+
+                                try
+                                {
+                                    if(dao.haveDateFromDay(exchangeDate))
+                                    {
+
+                                        Log.w("CurrencyExchangeDownloadService","exchange date is same or older than last update date");
+                                        break;
+                                    }
+                                } catch (SQLException e)
+                                {
+                                    Log.w("CurrencyExchangeDownloadService","cant get if data was downloaded before",e);
+                                }
                             }
                             else if(CURRENCY_ATRIBUTE.equals(attributeName))
                             {

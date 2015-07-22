@@ -98,7 +98,7 @@ public enum Currency implements Serializable
         }
         catch (Exception e)
         {
-            return JPY;
+            return EUR;
         }
     }
 
